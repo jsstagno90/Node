@@ -16,34 +16,69 @@ document.addEventListener('DOMContentLoaded', function () {
     inputAsunto.addEventListener('input', validar);
     inputMensaje.addEventListener('input', validar);
 
+    formulario.addEventListener('submit', function(e) {
+        e.preventDefault(); // Evita que se recargue la página
+
+        // Mostrar mensaje de éxito
+        const mensajeExito = document.createElement('p');
+        mensajeExito.textContent = 'Formulario enviado correctamente ✔️';
+        mensajeExito.style.color = 'green';
+        mensajeExito.style.marginTop = '10px';
+        formulario.appendChild(mensajeExito);
+
+        // Reiniciar formulario y estado
+        formulario.reset();
+        btnEnviar.disabled = true;
+        btnEnviar.classList.add('opacity-50');
+
+        // Reiniciar el objeto email
+        email.email = '';
+        email.asunto = '';
+        email.mensaje = '';
+
+        // Eliminar el mensaje después de 3 segundos
+        setTimeout(() => mensajeExito.remove(), 3000);
+    });
+    formulario.addEventListener('reset', function () {
+    // Deshabilitar el botón
+    btnEnviar.disabled = true;
+    btnEnviar.classList.add('opacity-50');
+
+    // Limpiar el objeto
+    email.email = '';
+    email.asunto = '';
+    email.mensaje = '';
+
+    // Quitar errores y bordes (opcional)
+    [inputEmail, inputAsunto, inputMensaje].forEach(input => {
+        eliminarAlerta(input);
+        input.style.borderColor = '';
+    });
+});
+
+    // 🔽 ESTAS FUNCIONES VAN FUERA DEL submit 👇
+
     function validar(e) {
         eliminarAlerta(e.target);
 
-        // Validar que no esté vacío
         if (e.target.value.trim() === '') {
             mostrarAlerta(e.target, 'Este campo es obligatorio');
             e.target.style.borderColor = 'red';
             return;
         }
 
-        // Validar el email con regex
         if (e.target.id === 'email' && !esEmailValido(e.target.value)) {
             mostrarAlerta(e.target, 'Email no válido');
             e.target.style.borderColor = 'red';
             return;
         }
 
-        e.target.style.borderColor = ''; // Está todo bien
+        e.target.style.borderColor = '';
 
-        // Guardar el valor en el objeto email
         email[e.target.name] = e.target.value.trim().toLowerCase();
-        console.log(email); // para debug
-        
-           // Guardar el valor en el objeto email
-    email[e.target.name] = e.target.value.trim().toLowerCase();
-    console.log(email); // para debug
+        console.log(email);
 
-    comprobarCampos(); // 🔥 Acá llamás a la función que habilita el botón
+        comprobarCampos();
     }
 
     function esEmailValido(valor) {
@@ -56,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         error.textContent = mensaje;
         error.classList.add('error');
         error.style.color = 'red';
-        error.style.fontSize = '12cpx';
+        error.style.fontSize = '12px';
         error.style.marginTop = '5px';
         input.parentElement.appendChild(error);
     }
@@ -69,13 +104,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function comprobarCampos() {
-    if (email.email !== '' && email.asunto !== '' && email.mensaje !== '') {
-        btnEnviar.disabled = false;
-        btnEnviar.classList.remove('opacity-50');
-    } else {
-        btnEnviar.disabled = true;
-        btnEnviar.classList.add('opacity-50');
+        if (email.email !== '' && email.asunto !== '' && email.mensaje !== '') {
+            btnEnviar.disabled = false;
+            btnEnviar.classList.remove('opacity-50');
+        } else {
+            btnEnviar.disabled = true;
+            btnEnviar.classList.add('opacity-50');
+        }
     }
-}
 
 });
