@@ -881,19 +881,19 @@ video {
 
 
 .h1buscador{
-  background-color: #3aa9dc;
+  background-color: #c49b98;
   padding: 10px 0px 5px 0px;
   border-bottom: 1px solid black;
 }
 
 #buscador{
-  background-color: #3aa9dc;
+  background-color: #81bd9a;
   text-align: center;
 padding: 5px;
 }
 
 
-#resultados{
+#resultado p{
 text-align: center;
-}
-
+padding: 5px;
+color: #6aa082;}
