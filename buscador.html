@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carrito</title>
+    <title>Proyecto</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
@@ -45,7 +45,6 @@
 
     <div class="contenedor">
 
-        
 
         <form id="buscador">
             <div class="row">
@@ -125,7 +124,10 @@
                 </div>
             </div>
         </form>
-
+        
+<button id="btn-limpiar" backgroundcolor="red" class="button u-full-width" type="button" style="margin: 20px 0;">
+  Limpiar filtros
+</button>
 
         <h1>Resultados</h1>
         <div id="resultado"></div>
@@ -155,16 +157,19 @@
         </div>
     </footer>
 
-    <script src="js/filtrarybuscar.js"></script>
     <script src="js/autos.js"></script>
+    <script src="js/filtrarybuscar.js"></script>
+    
 
-</body>
-<script>
+    <script>
   fetch('menu.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('menu').innerHTML = data;
     });
 </script>
+
+</body>
+
 
 </html>

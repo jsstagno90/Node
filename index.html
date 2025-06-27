@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Carrito</title>
+    <title>Proyecto</title>
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/skeleton.css">
     <link rel="stylesheet" href="css/custom.css">
@@ -23,24 +23,24 @@
                     <ul>
                         <li class="submenu">
                             <img src="img/cart.png" id="img-carrito" style="position: relative;">
-                            <span id="contador-carrito"
-                                style="position: absolute; top: 10px; background: red; color: white; border-radius: 10%; padding: 2px 6px; font-size: 12px;">
-                                0
-                            </span>
-                            <div id="carrito">
+                                <span id="contador-carrito"
+                                    style="position: absolute; top: 10px; background: red; color: white; border-radius: 10%; padding: 2px 6px; font-size: 12px;">
+                                    0
+                                </span>
+                                <div id="carrito">
 
-                                <table id="lista-carrito" class="u-full-width">
-                                    <thead>
-                                        <tr>
-                                            <th>Imagen</th>
-                                            <th>Nombre</th>
-                                            <th>Precio</th>
-                                            <th>Cantidad</th>
-                                            <th></th>
-                                        </tr>
-                                    </thead>
-                                    <tbody></tbody>
-                                </table>
+                                    <table id="lista-carrito" class="u-full-width">
+                                        <thead>
+                                            <tr>
+                                                <th>Imagen</th>
+                                                <th>Nombre</th>
+                                                <th>Precio</th>
+                                                <th>Cantidad</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody></tbody>
+                                    </table>
 
                                 <a href="#" id="vaciar-carrito" class="button u-full-width">Vaciar Carrito</a>
                             </div>
@@ -288,13 +288,14 @@
 
     <script src="js/app.js"></script>
 
-</body>
-<script>
+    <script>
   fetch('menu.html')
     .then(response => response.text())
     .then(data => {
       document.getElementById('menu').innerHTML = data;
     });
 </script>
+</body>
+
 
 </html>
