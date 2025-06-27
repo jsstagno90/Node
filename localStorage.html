@@ -65,24 +65,27 @@
     </header>
 
     <nav class="container" style="margin-top: 20px">
-      <div id="menu"></div>
+  <div id="menu"></div>
 
-      <div class="contenidoLocal">
-        <h1 class="localStorage">Local Storage</h1>
-      
+  <div class="contenidoLocal">
+    <h1 class="localStorage">Local Storage</h1>
+  </div>
+
+  <div class="row">  <!-- Esta es la línea nueva que agregás -->
+    <div class="six columns">
+      <form id="formlocal">
+        <label for="tweet" class="tweet"> Tweet:</label>
+        <textarea id="tweetlocal" class="u-full-width"></textarea>
+        <input type="submit" class="button u-full-width button-primary" value="agregar" />
+      </form>
     </div>
 
-    
-      <div class="six columns">
-            <form id="formlocal">
-                <label for="tweet"></label>
-                <textarea id="tweetlocal" class="u-full-width"></textarea>
-            </form>
-      </div>
-
-
-
-    </nav>
+    <div class="six columns">
+      <h2 id="h2tweets">Mis Tweets:</h2>
+      <div id="lista-tweet"></div>
+    </div>
+  </div>  <!-- Aquí cerrás el div .row -->
+</nav>
 
     <div class="row"></div>
 
