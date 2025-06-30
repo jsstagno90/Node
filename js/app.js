@@ -10,11 +10,19 @@ function cargarEventListener() {
     listaCursos.addEventListener('click', agregarCurso);
     vaciarCarritoBtn.addEventListener('click', () => {
         articulosCarrito = [];
-        limpiarHTML(); // Limpiar HTML también
-        
+        limpiarHTML();
+        actualizarContadorCarrito();
+        localStorage.removeItem('carrito');
     });
-        carrito.addEventListener('click', eliminarCurso);
+
+    carrito.addEventListener('click', eliminarCurso);
+
+    document.addEventListener('DOMContentLoaded', () => {
+        articulosCarrito = JSON.parse(localStorage.getItem('carrito')) || [];
+        carritoHTML();
+    });
 }
+
 
 
 // funciones
@@ -55,22 +63,7 @@ function leerDatosCurso(curso) {
 }
 
 
-// Muestra el carrito en el HTML
-function carritoHTML() {
-    limpiarHTML();
 
-    articulosCarrito.forEach(curso => {
-        const row = document.createElement('tr');
-        row.innerHTML = `
-            <td><img src="${curso.imagen}" width="100"></td>
-            <td>${curso.titulo}</td>
-            <td>${curso.precio}</td>
-            <td>${curso.cantidad}</td>
-            <td><a href="#" class="borrar-curso" data-id="${curso.id}"> X </a></td>
-        `;
-        contenedorCarrito.appendChild(row);
-    });
-}
 
 // Elimina los cursos del tbody (antes de volver a pintar)
 function limpiarHTML() {
@@ -89,6 +82,7 @@ function limpiarHTML() {
         articulosCarrito = articulosCarrito.filter(curso => curso.id !== cursoId);
 
         carritoHTML(); // Vuelve a mostrar el carrito actualizado
+        sincronizarStorage();
     }
 }
 
@@ -108,6 +102,7 @@ function carritoHTML() {
     });
 
     actualizarContadorCarrito(); // <-- Agregá esta línea
+    sincronizarStorage();
 }
 
 function actualizarContadorCarrito() {
@@ -115,8 +110,7 @@ function actualizarContadorCarrito() {
     const totalCantidad = articulosCarrito.reduce((total, curso) => total + curso.cantidad, 0);
     contador.textContent = totalCantidad;
 }
-vaciarCarritoBtn.addEventListener('click', () => {
-    articulosCarrito = [];
-    limpiarHTML();
-    actualizarContadorCarrito(); // <--- para que se vea en cero
-});
+
+function sincronizarStorage() {
+    localStorage.setItem('carrito', JSON.stringify(articulosCarrito));
+}
