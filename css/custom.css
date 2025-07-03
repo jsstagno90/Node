@@ -929,3 +929,89 @@ font-size: 20px;
   min-height: 150px;
     font-family: Arial, Helvetica, sans-serif; 
 }
+
+/* Contenedor principal del presupuesto */
+#presupuesto {
+    margin-top: 20px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Renglón de presupuesto y restante */
+#presupuesto p {
+    margin: 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Colores de las alertas */
+.alert-primary {
+    background-color: #d6eaf8;
+    color: #154360;
+    border: 1px solid #aed6f1;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.alert-success {
+    background-color: #d4efdf;
+    color: #145a32;
+    border: 1px solid #a9dfbf;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+/* Formulario de gasto */
+#agregar-gasto {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+#agregar-gasto label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+#agregar-gasto input {
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#agregar-gasto button {
+    background-color: #3498db;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 6px;
+    width: 100%;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#agregar-gasto button:hover {
+    background-color: #2e86c1;
+}
+
+/* Listado de gastos */
+#gastos ul {
+    list-style: none;
+    padding: 0;
+}
+
+#gastos li {
+    background-color: #f7f9f9;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-left: 4px solid #3498db;
+    border-radius: 4px;
+}
