@@ -212,3 +212,4 @@ function cargarDatos() {
 
   gastos = gastosGuardados ? JSON.parse(gastosGuardados) : [];
 }
+    
