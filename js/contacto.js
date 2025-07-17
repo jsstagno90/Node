@@ -17,46 +17,46 @@ document.addEventListener('DOMContentLoaded', function () {
     inputMensaje.addEventListener('input', validar);
 
     formulario.addEventListener('submit', function(e) {
-        e.preventDefault(); // Evita que se recargue la página
+        e.preventDefault(); 
 
-        // Mostrar mensaje de éxito
+
         const mensajeExito = document.createElement('p');
         mensajeExito.textContent = 'Formulario enviado correctamente ✔️';
         mensajeExito.style.color = 'green';
         mensajeExito.style.marginTop = '10px';
         formulario.appendChild(mensajeExito);
 
-        // Reiniciar formulario y estado
+
         formulario.reset();
         btnEnviar.disabled = true;
         btnEnviar.classList.add('opacity-50');
 
-        // Reiniciar el objeto email
+
         email.email = '';
         email.asunto = '';
         email.mensaje = '';
 
-        // Eliminar el mensaje después de 3 segundos
+
         setTimeout(() => mensajeExito.remove(), 3000);
     });
     formulario.addEventListener('reset', function () {
-    // Deshabilitar el botón
+ 
     btnEnviar.disabled = true;
     btnEnviar.classList.add('opacity-50');
 
-    // Limpiar el objeto
+
     email.email = '';
     email.asunto = '';
     email.mensaje = '';
 
-    // Quitar errores y bordes (opcional)
+
     [inputEmail, inputAsunto, inputMensaje].forEach(input => {
         eliminarAlerta(input);
         input.style.borderColor = '';
     });
 });
 
-    // 🔽 ESTAS FUNCIONES VAN FUERA DEL submit 👇
+    //  ESTAS FUNCIONES VAN FUERA DEL submit 👇
 
     function validar(e) {
         eliminarAlerta(e.target);

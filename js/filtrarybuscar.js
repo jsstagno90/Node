@@ -1,4 +1,4 @@
-// Variables del DOM
+
 const resultado = document.querySelector("#resultado");
 const marca = document.querySelector("#marca");
 const year = document.querySelector("#year");
@@ -11,7 +11,7 @@ const color = document.querySelector("#color");
 const max = new Date().getFullYear();
 const min = max - 10;
 
-// Objeto búsqueda
+
 const datosBusqueda = {
   marca: '',
   year: '',
@@ -22,14 +22,12 @@ const datosBusqueda = {
   color: ''
 };
 
-// Eventos
+
 document.addEventListener('DOMContentLoaded', () => {
   llenarSelect();
-  // Si querés mostrar todos los autos al cargar, descomenta la siguiente línea:
-  // mostrarAutos(autos);
+
 });
 
-// Listeners para filtrar
 marca.addEventListener('change', e => { 
   datosBusqueda.marca = e.target.value; 
   filtrarAuto(); 
@@ -59,7 +57,7 @@ color.addEventListener('change', e => {
   filtrarAuto(); 
 });
 
-// Funciones
+
 
 function llenarSelect() {
   for(let i = max; i >= min; i--) {
@@ -152,12 +150,12 @@ function mostrarAutos(autos) {
     return;
   }
 
-  // Crear tabla
+
   const tabla = document.createElement('table');
   tabla.style.width = '100%';
   tabla.style.borderCollapse = 'collapse';
 
-  // Crear encabezado
+
   const thead = document.createElement('thead');
   const encabezadoFila = document.createElement('tr');
 
@@ -176,13 +174,13 @@ function mostrarAutos(autos) {
   thead.appendChild(encabezadoFila);
   tabla.appendChild(thead);
 
-  // Crear cuerpo de la tabla
+
   const tbody = document.createElement('tbody');
 
   autos.forEach(auto => {
     const fila = document.createElement('tr');
 
-    // Crear celdas
+
     const marcaTd = document.createElement('td');
     marcaTd.textContent = auto.marca;
     marcaTd.style.border = '1px solid black';
@@ -234,12 +232,12 @@ function mostrarAutos(autos) {
   resultado.appendChild(tabla);
 }
 
-// Agrega esta variable para el botón
+
 const btnLimpiar = document.querySelector('#btn-limpiar');
 
-// Evento para limpiar filtros y mostrar todos los autos
+
 btnLimpiar.addEventListener('click', () => {
-  // Resetear selects
+
   marca.value = '';
   year.value = '';
   minimo.value = '';
@@ -248,7 +246,7 @@ btnLimpiar.addEventListener('click', () => {
   transmision.value = '';
   color.value = '';
 
-  // Resetear objeto datosBusqueda
+
   datosBusqueda.marca = '';
   datosBusqueda.year = '';
   datosBusqueda.minimo = '';
@@ -257,12 +255,11 @@ btnLimpiar.addEventListener('click', () => {
   datosBusqueda.transmision = '';
   datosBusqueda.color = '';
 
-  // Limpiar área resultados (no mostrar autos)
+
   limpiarHTML();
 });
 
 
-// Modifica también la función mostrarAutos para mostrar tabla (código que te pasé antes)
 function mostrarAutos(autos) {
   limpiarHTML();
 

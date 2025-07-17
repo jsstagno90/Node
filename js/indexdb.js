@@ -6,14 +6,14 @@ const fechaInput = document.querySelector('#fecha');
 const horaInput = document.querySelector('#hora');
 const sintomasInput = document.querySelector('#sintomas');
 
-// Contenedor para las citas
+
 const contenedorCitas = document.querySelector('#citas');
 
-// Formulario nuevas citas
+
 const formulario = document.querySelector('#nueva-cita');
 formulario.addEventListener('submit', nuevaCita);
 
-// Heading
+
 const heading = document.querySelector('#administra');
 
 let editando = false;
@@ -23,7 +23,7 @@ window.onload = () => {
     crearDB();
 }
 
-// Eventos
+
 function eventListeners() {
     mascotaInput.addEventListener('change', datosCita);
     propietarioInput.addEventListener('change', datosCita);
@@ -163,37 +163,70 @@ const administrarCitas = new Citas();
 const ui = new UI(administrarCitas);
 
 function nuevaCita(e) {
-    e.preventDefault();
+  e.preventDefault();
 
-    const { mascota, propietario, telefono, fecha, hora, sintomas, id } = citaObj;
+  const { mascota, propietario, telefono, fecha, hora, sintomas, id } = citaObj;
 
-    if (mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas === '') {
-        ui.imprimirAlerta('Todos los campos son obligatorios', 'error');
-        return;
-    }
 
-    if (editando) {
-        administrarCitas.editarCita({ ...citaObj });
+  if (mascota === '' || propietario === '' || telefono === '' || fecha === '' || hora === '' || sintomas === '') {
+    ui.imprimirAlerta('Todos los campos son obligatorios', 'error');
+    return;
+  }
 
-        ui.imprimirAlerta('Guardado Correctamente');
+  if (editando) {
 
-        formulario.querySelector('input[type="submit"]').value = 'Crear Cita';
+    administrarCitas.editarCita({ ...citaObj });
 
-        editando = false;
-    } else {
-        citaObj.id = Date.now();
+    const transaction = DB.transaction(['citas'], 'readwrite');
+    const objectStore = transaction.objectStore('citas');
+    objectStore.put({ ...citaObj });
 
-        administrarCitas.agregarCita({ ...citaObj });
+    transaction.onerror = function () {
+      console.log('Error al actualizar en IndexedDB');
+    };
 
-        ui.imprimirAlerta('Se agregó correctamente');
-    }
+    transaction.oncomplete = function () {
+      console.log('Cita actualizada en IndexedDB');
+    };
 
-    ui.imprimirCitas(administrarCitas);
 
-    reiniciarObjeto();
+    ui.imprimirAlerta('Guardado Correctamente');
 
-    formulario.reset();
+
+    formulario.querySelector('input[type="submit"]').value = 'Crear Cita';
+
+    // No está editando más
+    editando = false;
+  } else {
+
+    citaObj.id = Date.now();
+
+
+    administrarCitas.agregarCita({ ...citaObj });
+
+    const transaction = DB.transaction(['citas'], 'readwrite');
+    const objectStore = transaction.objectStore('citas');
+    objectStore.add({ ...citaObj });
+
+    transaction.onerror = function () {
+      console.log('Hubo un error al agregar a IndexedDB');
+    };
+
+    transaction.oncomplete = function () {
+      console.log('Cita agregada a IndexedDB correctamente');
+    };
+
+    ui.imprimirAlerta('Se agregó correctamente');
+  }
+
+
+  ui.imprimirCitas(administrarCitas);
+
+
+  reiniciarObjeto();
+  formulario.reset();
 }
+
 
 function reiniciarObjeto() {
     citaObj.mascota = '';
@@ -206,9 +239,25 @@ function reiniciarObjeto() {
 }
 
 function eliminarCita(id) {
-    administrarCitas.eliminarCita(id);
+
+  administrarCitas.eliminarCita(id);
+
+
+  const transaction = DB.transaction(['citas'], 'readwrite');
+  const objectStore = transaction.objectStore('citas');
+  objectStore.delete(id);
+
+  transaction.onerror = function () {
+    console.log('Hubo un error al eliminar de IndexedDB');
+  };
+
+  transaction.oncomplete = function () {
+    console.log(`Cita con ID ${id} eliminada de IndexedDB`);
+
     ui.imprimirCitas(administrarCitas);
+  };
 }
+
 
 function cargarEdicion(cita) {
     const { mascota, propietario, telefono, fecha, hora, sintomas, id } = cita;
@@ -243,6 +292,24 @@ function crearDB() {
     crearDB.onsuccess = function () {
         DB = crearDB.result;
         console.log('BD creada y lista para usarse');
+
+        
+        const objectStore = DB.transaction('citas').objectStore('citas');
+
+        objectStore.openCursor().onsuccess = function (e) {
+            const cursor = e.target.result;
+
+            if (cursor) {
+              
+                administrarCitas.agregarCita(cursor.value);
+
+           
+                ui.imprimirCitas(administrarCitas);
+
+                cursor.continue();
+            }
+        };
+
     };
 
     crearDB.onupgradeneeded = function (e) {
