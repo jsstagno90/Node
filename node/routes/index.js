@@ -13,7 +13,7 @@ router.get('/nosotros',(req, res) => {
 
 
     res.render('nosotros', {
-        viajes
+       viajes
     })
 })
 

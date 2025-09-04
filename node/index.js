@@ -9,6 +9,15 @@ const port = process.env.PORT || 4000;
 //habilitar BUG
 app.set('view engine', 'pug');
 
+//Obtener el a;o actual 
+app.use((req, res, next)=> {
+    const year = new Date();
+    res.locals.actualYears = year.getFullYear();  
+    next();
+});
+
+// Definir carpeta publica
+app.use(express.static('public'))
 
 //Agregar Router
 app.use('/', router);
