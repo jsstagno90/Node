@@ -1,6 +1,24 @@
 extends ./layout/index
 
-block contenido 
-    h1 NOSOTROS
+block  contenido 
+    main.container.mt-5 
+        .row
+            .col-md-5
+                img(src="img/nosotros.jpg",alt="Imagen sobre nosotros" class="img-fluid")
+            .col-md-7
+                h1= pagina
+                blockquote "En Flysta creemos que viajar no es solo trasladarse de un lugar a otro, sino vivir experiencias que quedan para siempre en la memoria. Nuestra misión es ayudarte a descubrir el mundo de una manera cómoda, segura y auténtica.
 
-    img(src="img/cupon.jpg")
+                p Contamos con un equipo de profesionales apasionados por los viajes, que te asesoran y acompañan en cada etapa: desde la planificación hasta el regreso a casa. Nos especializamos en crear itinerarios a medida, para que cada viaje sea único y refleje lo que realmente buscás.
+
+                p Ya sea que quieras disfrutar de unas vacaciones en familia, una escapada romántica, un viaje de aventura o un recorrido cultural, en Flysta tenemos las opciones ideales para vos. Nuestro compromiso es brindarte atención personalizada, tarifas competitivas y experiencias inolvidables.
+
+                p Porque viajar es mucho más que conocer destinos: es conectarse con nuevas culturas, personas y momentos irrepetibles.
+    
+    .listado-iconos
+        .container.mt-5.py-5.text-center
+            .row
+                .col-md-4
+                    img(src="img/icono_seguridad.svg", alt="icono seguridad", class='img-fluid mb-4')
+                    h2.mb-4 seguridad 
+                    p Protección garantizada en cada destino.

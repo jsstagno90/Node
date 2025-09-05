@@ -12,7 +12,8 @@ app.set('view engine', 'pug');
 //Obtener el a;o actual 
 app.use((req, res, next)=> {
     const year = new Date();
-    res.locals.actualYears = year.getFullYear();  
+    res.locals.actualYears = year.getFullYear(); 
+    res.locals.nombresitio = 'Agencia de viajes' 
     next();
 });
 
