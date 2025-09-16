@@ -1,6 +1,32 @@
 extends ./layout/index
 
-block  contenido 
+block contenido 
     main.container.mt-5 
+        h1.text-center.mt-5= pagina
         .row
-            h1= pagina
+            .col-md-12
+                h2.d-block.w-100.text-center Agrega un testimonial
+
+                //- Mostrar errores si existen
+                if errores
+                    each error in errores
+                        .alert.alert-danger.text-center= error.mensaje
+
+                //- Mostrar mensaje de éxito si existe
+                if exito
+                    .alert.alert-success.text-center= exito
+
+            .row.justify-content-center.col
+                .col-md-8
+                    form(action='/testimoniales' method='POST')
+                        .form-group
+                            label(for='nombre') Nombre
+                            input#nombre.form-control(type='text', placeholder='Tu nombre', name='nombre', value=nombre || '')
+                        .form-group
+                            label(for='correo') E-mail
+                            input#correo.form-control(type='email', placeholder='Correo electrónico', name='correo', value=correo || '')
+                        .form-group
+                            label(for='mensaje') Tu mensaje
+                            textarea#mensaje.form-control(name='mensaje', rows=3)= mensaje || ''
+
+                        input.btn.btn-success.btn-block(type='submit')

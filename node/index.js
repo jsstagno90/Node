@@ -1,9 +1,16 @@
 console.log('Iniciando servidor...');
 import express from 'express';
 import router from './routes/index.js';
+import db from './config/db.js';
 
 const app = express();
 const port = process.env.PORT || 4000;
+
+
+// conectar a base de datos
+db.authenticate()
+    .then(( ) => console.log('CONECTADO A BASE DE DATOS YES YES'))
+    .catch(error => console.log('NO SE CONECTO LPM',error))
 
 
 //habilitar BUG
@@ -19,6 +26,8 @@ app.use((req, res, next)=> {
 
 // Definir carpeta publica
 app.use(express.static('public'))
+
+app.use(express.urlencoded({ extended: true }));
 
 //Agregar Router
 app.use('/', router);
