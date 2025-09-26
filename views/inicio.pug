@@ -1,0 +1,32 @@
+extends ./layout/index
+block slider
+    .slider 
+        h1 Rio de janeiro 
+        em AVENTURA
+block  contenido 
+    main.container.mt-6
+        h2.text-center.mb-6 Sobre nosotros
+        .row.mb-6
+            .col-md-6
+                p Río de Janeiro es una de las ciudades más vibrantes y turísticas de Brasil, famosa por la alegría de su gente, sus playas interminables y su imponente geografía. Conocida como la “Cidade Maravilhosa”, combina la energía del Carnaval, la música de la samba y el bossa nova, con paisajes espectaculares como el Pan de Azúcar y el Cristo Redentor, una de las siete maravillas del mundo moderno.
+                p Sus playas, como Copacabana e Ipanema, son el lugar ideal para disfrutar del sol, practicar deportes o simplemente relajarse frente al mar. Además, Río ofrece una vida nocturna intensa, barrios llenos de cultura como Santa Teresa y Lapa, y una gastronomía que mezcla lo tradicional con lo contemporáneo. Es un destino que cautiva tanto a los amantes de la naturaleza como a quienes buscan diversión y cultura.
+            .col-md-6
+                img(src="img/inicio_nosotros.jpg" alt="imagen nosotros")
+
+            include ./layout/bloque_viajes
+
+    .descuento 
+        .container 
+            .row 
+                .col-md-6
+                    .contenido
+                        h3 5% de descuento
+                        p.titulo Viaje a Canada
+                        p.fecha(style="font-size:2rem")  20 de marzo 2026 - 28 de marzo 2026
+                        p.precio(style=" color:rgba(181, 186, 236, 1);12px;border-radius:20px; font-size:3rem;") $2500 usd 
+
+    .container 
+        h2.mt-5.text-center Testimoniales
+        include ./layout/bloque_testimoniales
+
+                                
