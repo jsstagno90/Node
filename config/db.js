@@ -1,9 +1,8 @@
 import sequelize, { Sequelize } from 'sequelize';
+import dotenv from 'dotenv'
+dotenv.config()
 
-const db = new Sequelize("agenciaviajes", "root", "juan1234", {
-    host: "127.0.0.1",
-    port: '3306',
-    dialect: "mysql",
+const db = new Sequelize(process.env.DATABASE_URL, {
     define: {
         timestamps: false
     },
