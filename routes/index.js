@@ -11,7 +11,7 @@ import {
 } from '../controllers/testimonialesController.js';
 const router = express.Router();
 
-router.get('/inicio', paginaInicio);
+router.get('/', paginaInicio);
 
 
 router.get('/nosotros', paginaNosotros);
