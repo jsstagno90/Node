@@ -12,6 +12,7 @@ import {
 const router = express.Router();
 
 router.get('/', paginaInicio);
+router.get('/inicio', paginaInicio);
 
 
 router.get('/nosotros', paginaNosotros);
